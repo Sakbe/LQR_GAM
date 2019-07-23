@@ -25,6 +25,7 @@ LQR::LQR(){
 
 	this-> x_pos = (float[N_state]){-0.005344092,	0.0520246,	-0.514431535,	1.150989527,	0.550062681,	-0.87777012,	0.308169602,	-0.356773408,	1.066604321,	-0.186231247};
 	this-> x_pos = (float[N_state]){0.0191923,	0.289779,	0.309377,	0.0539503,	-0.2685851,	0.6644621,	-1.0757866,	-0.0274285,	0.1494512,	-0.3546514};
+	this-> x_pos = (float[N_state]){    0.0075 ,   0.2071 ,  -0.0394  , -0.1344  , -0.0625   , 0.4041  , -0.5053 ,   0.0973  ,  0.2590,   -0.0032};
 
 	//this-> K_LQR_pos =(float[N_input * N_state]) {-39.8874724584811, -70.6769666120137, 354.869808121735, 370.159896447712, -106.569303855515, -10.6727031034049, -29.8250480200422, 75.3583282160950, -135.655340474040, -27.8586258177635,
 	//						4.85034537803885, 16.3699444462248, -103.189045436383, -88.9493312103841, 36.1506690550597, 19.0337453517795, 10.4943236824918, -28.3848265454111, 45.6326833691854, 8.77044127460252};
@@ -85,10 +86,10 @@ this-> D_est_pos=(float[(N_state + N_output) * (N_input + N_output)]) {0,	0,	0,	
 	//more slow
 	this-> N_BAR_pos = (float[N_input +  N_output]){1324.4936648,	-3781.71519,
 							5627.5062401,	947.5168105};
-							
+
 		this-> N_BAR_pos = (float[N_input +  N_output]){5853.8240915,	-13055.372391,
-														4594.5643019,	3609.2329171};						
-							
+														4594.5643019,	3609.2329171};
+
 
 	this-> K_LQR_pos =(float[N_input * N_state]) {3700.2519778,	-352.6458013,	-113.7109751,	31.1419703,	-25.2673037,	-136.5708496,	16.8915749,	-65.2971081,	172.4054825,	-111.1846448,
 						      -378.759192,	23.8683873,	49.1286694,	38.0276358,	61.7983902,	-42.3959233,	30.2818625,	-24.4788253,	100.1365539,	-53.1858175};
@@ -96,11 +97,11 @@ this-> D_est_pos=(float[(N_state + N_output) * (N_input + N_output)]) {0,	0,	0,	
 this-> K_LQR_pos =(float[N_input * N_state]) {9989.8209768,	-478.4496862,	-211.4326002,	-178.1454089,	-33.2752205,	-239.4939687,	78.5969423,	-156.2937366,	306.662527,	-213.3528498,
 						-2038.9472632,	-11.4097386,	121.0765111,	51.6192656,	75.3742932,	-32.1506706,	31.9659901,	-18.6252239,	94.5317454,	-54.1750745};
 
-	
+
 	this-> x_neg=(float[N_state])  {-0.01322152646,	0.21257243483,	0.24681826366,	-0.33280829935,	-0.00461930354,	0.02045689304,	-0.05335478233,	0.02913866606,	-0.38100515631,	-0.01904457052};
 	this-> x_neg=(float[N_state])  {-0.1219579,	0.1357889,	0.8427376,	-0.3916806,	0.3457801,	0.0998817,	-0.0734193,	0.0101452,	-0.4403928,	-0.3972219};
 
-	
+
 	this-> x_dot_neg=(float[N_state])  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 //	this-> K_LQR_neg=(float[N_input * N_state])  {-1.10243700688381, -26.6888168111469, 248.208386299799, 2272.69314089294, 341.435985384170, 116.974185358079, -1571.00753489878, -331.351679250269, -1271.06969797964, -4441.09340489016,
 //							-0.233414809301534, -21.1374545809135, 237.120488501101, 3170.68925311282, -143.026532612836, 258.466914847382, -1451.21045848359, -298.057584698670, -925.765520002125, -4247.87411829111};
@@ -117,13 +118,13 @@ this-> A_est_neg=(float[N_state * N_state]){0.771434903,	-0.021348163,	0.0261535
 -0.25124827,	1.261878371,	0.134749249,	0.002615248,	0.035810255,	0.022211017,	-0.044809174,	0.296370924,	0.880721569,	-0.150740668,
 3.595902443,	-0.37080878,	-0.199803695,	0.015529932,	-0.002768105,	-0.041213844,	-0.194448233,	-0.153701216,	0.084358327,	0.940047324};
 
-	
+
 this-> B_est_neg=(float[N_state * ( N_input +  N_output)]) {-0.00001070484,	-0.00018352285,	-0.00003740476,	-0.00016039671,	-0.00002731199,	-0.00028521486,	0.00069076713,	0.00005484348,	0.00036286309,	-0.0000075353,
 0.00000686852,	0.00057635334,	0.00029789837,	0.00083011913,	0.00079056883,	0.00058172137,	-0.00060404028,	0.00136100687,	0.00043902177,	-0.00052344694,
 0.09232706577,	3.0948278904,	2.15514469147,	2.06601238251,	0.90465670824,	6.51248788834,	-9.77792072296,	4.19905138016,	-5.75626945496,	1.2126326561,
 1.07229363918,	0.35713252425,	-22.09178352356,	1.69208729267,	29.16925430298,	9.78439331055,	-5.65546703339,	-2.42480802536,	3.98085331917,	-18.06007766724};
 
-	
+
 this-> C_est_neg=(float[N_state * (N_state +  N_output)]) {0.117056169,	0.026251998,	-0.003811811,	-0.000269252,	0.000071083,	-0.000344695,	0.000170941,	-0.000610935,	-0.00031992,	0.000382334,
 0.1303069,	-0.002285592,	-0.005423918,	-0.000344409,	0.000059554,	-0.000417361,	-0.000087633,	-0.000634914,	-0.000244024,	0.000796742,
 0.783260882,	-0.027212553,	0.00785953,	0.00052888,	-0.000118324,	0.000661077,	-0.000127797,	0.001100519,	0.000516234,	-0.000959923,
@@ -147,7 +148,7 @@ this->C_inv_neg=(float[N_state*N_output]){0.1402455,	4.7841462,
 					0.0385296,	-0.0209643,
 					-0.006962,	-0.0204256,
 					-0.015843,	-0.0018004,
-					-0.0507191,	0.0529503};	
+					-0.0507191,	0.0529503};
 
 this-> D_est_neg=(float[(N_state + N_output) * (N_input + N_output)]){0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,
 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,
@@ -201,30 +202,30 @@ LQRouputs  LQR::MIMO_CONTROL_POSITIVE(float R_ref, float Z_ref, float R_real, fl
 	float *outputs;
 	outputs =(float[2]) {0, 0};
 	LQRouputs Outputs={0,0};
-	
-	
-	
+
+
+
 	//Nbar(2x2)
 	u_Nbar_0 = (R_ref* this->N_BAR_pos[0]) + (Z_ref* this->N_BAR_pos[1]);
 	u_Nbar_1 = (R_ref * this->N_BAR_pos[2]) + (Z_ref * this->N_BAR_pos[3]);
-	
+
 	//u=u-k_lqr*x
 	for (i = 0; i < N_state; i++) {
 		temp += this->X_LQR_pos[i] * this->K_LQR_pos[i];
 		}
 	u_vertical = u_Nbar_0 - temp;
-	temp = 0;		
-	
+	temp = 0;
+
 	for (i = 0; i < N_state; i++) {
 		temp += this->X_LQR_pos[i] * this->K_LQR_pos[i+N_state];
-		
+
 	}
 	u_horizontal = u_Nbar_1 - temp;
 	temp = 0;
-	
+
 	Outputs.Ivert = u_vertical;
 	Outputs.Ihor = u_horizontal;
-	
+
 	return Outputs;
 }
 
@@ -240,30 +241,30 @@ LQRouputs  LQR::MIMO_CONTROL_NEGATIVE(float R_ref, float Z_ref, float R_real, fl
 	float *outputs;
 	outputs =(float[2]) {0, 0};
 	LQRouputs Outputs={0,0};
-	
-	
-	
+
+
+
 	//Nbar(2x2)
 	u_Nbar_0 = (R_ref* this->N_BAR_neg[0]) + (Z_ref* this->N_BAR_neg[1]);
 	u_Nbar_1 = (R_ref * this->N_BAR_neg[2]) + (Z_ref * this->N_BAR_neg[3]);
-	
+
 	//u=u-k_lqr*x
 	for (i = 0; i < N_state; i++) {
-		temp += this->X_LQR_neg[i] * this->K_LQR_neg[i];	
+		temp += this->X_LQR_neg[i] * this->K_LQR_neg[i];
 	}
 	u_vertical = u_Nbar_0 - temp;
-	temp = 0.0;	
-	
+	temp = 0.0;
+
 	for (i = 0; i < N_state; i++) {
 		temp += this->X_LQR_neg[i] * this->K_LQR_neg[i+N_state];
-		
+
 	}
 	u_horizontal = u_Nbar_1 - temp;
 		temp = 0.0;
-		
+
 	Outputs.Ivert = u_vertical;
 	Outputs.Ihor = u_horizontal;
-	
+
 	return Outputs;
 }
 
@@ -286,24 +287,24 @@ Kalman LQR:: KALMAN_FILTER_POS(float R_real, float Z_real, float I_vertical, flo
 	int m=0;
 	int n=0;
 	// buffers time
-	
+
 	float buff=0.0;
 	float buffer=0.0;
-	
-	
+
+
 	float* y_est;
 	y_est =(float[2]){0, 0};
 	float* X_est;
 	X_est =(float[10]){0, 0,0,0,0,0,0,0,0,0};
-	
-	
-	Kalman Outputs={0.085,0.085,X_est};
-	
 
-	buff=0.0;	
-			
-	if(sign == 1){	
-		
+
+	Kalman Outputs={0.085,0.085,X_est};
+
+
+	buff=0.0;
+
+	if(sign == 1){
+
 		for(j = 0; j < N_state; j++){
 			buff = 0.0;
 			for (i = 0; i < N_state; i++) {
@@ -312,19 +313,19 @@ Kalman LQR:: KALMAN_FILTER_POS(float R_real, float Z_real, float I_vertical, flo
 			}
 			this->x_dot_pos[j] = buff;
 		}
-		
+
 		for(i = 0; i < N_state; i++){
 			j= i + (N_state);
 			m=i + 2*(N_state);
 			n=i + 3*(N_state);
 			temp =  this->B_est_pos[i] * I_vertical + this->B_est_pos[j] * I_horizontal + this->B_est_pos[m] * R_real + this->B_est_pos[n] * Z_real;
 			this->x_dot_pos[i] += temp;
-			
+
 		}
 		temp = 0.0;
-		
+
 		//x^(k+1) = A_est * x(k)+ B_est * u(k)
-				
+
 		//[y_est x_est] = C_est x_est + D_est [u_real y_real]
 		for(j = 0; j < N_output; j++){
 			buff = 0.0;
@@ -334,8 +335,8 @@ Kalman LQR:: KALMAN_FILTER_POS(float R_real, float Z_real, float I_vertical, flo
 			}
 			y_est[j] = buff;
 		}
-		
-	
+
+
 
 			buff =  this->D_est_pos[24] * R_real + this->D_est_pos[36] * Z_real;
 			y_est[0] += buff;
@@ -343,42 +344,42 @@ Kalman LQR:: KALMAN_FILTER_POS(float R_real, float Z_real, float I_vertical, flo
 			buff =  this->D_est_pos[25] * R_real + this->D_est_pos[37] * Z_real;
 			y_est[1] += buff;
 			buff = 0.0;
-			
-			
 
-		
 
-		
+
+
+
+
 			//x(k)=x(k+1) for the next step
 
-		
+
 		Outputs.Kalman_R= y_est[0];
 		Outputs.Kalman_Z= y_est[1];
 		Outputs.X_est= this-> x_pos;
-		
+
 		buffer = 0.0;
 		for (i = 0; i < N_state; i++) {
 			buffer =this->x_dot_pos[i];
 			this->x_pos[i]=buffer;
 		}
-		
+
 			for(i=0; i< N_state; i++){
 		buff = this->x_pos[i];
 		this->X_LQR_pos[i] = buff;
 	}
-		
+
 		}else{
 			Outputs.Kalman_R= 0.085;
 			Outputs.Kalman_Z= 0.085;
 				for (i = 0; i < N_state; i++) {
 						X_est[i]=0.0;}
-										
+
 			Outputs.X_est=X_est;
 			}
-	
+
 
 	return Outputs;
-	
+
 }
 
 Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, float I_horizontal, int sign){
@@ -391,21 +392,21 @@ Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, flo
 	int m=0;
 	int n=0;
 	// buffers time
-	
+
 	float buff=0.0;
 	float buffer=0.0;
-	
+
 
 	float* y_est;
 	y_est =(float[2]){0, 0};
 	float* X_est;
 	X_est =(float[10]){0, 0,0,0,0,0,0,0,0,0};
 	Kalman Outputs={0.085,0.085,X_est};
-	
 
-	buff=0.0;	
-	if(sign == 1){	
-		
+
+	buff=0.0;
+	if(sign == 1){
+
 		for(j = 0; j < N_state; j++){
 			buff = 0.0;
 			for (i = 0; i < N_state; i++) {
@@ -414,19 +415,19 @@ Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, flo
 			}
 			this->x_dot_neg[j] = buff;
 		}
-		
+
 		for(i = 0; i < N_state; i++){
 			j= i + (N_state);
 			m=i + 2*(N_state);
 			n=i + 3*(N_state);
 			temp =  this->B_est_neg[i] * I_vertical + this->B_est_neg[j] * I_horizontal + this->B_est_neg[m] * R_real + this->B_est_neg[n] * Z_real;
 			this->x_dot_neg[i] += temp;
-			
+
 		}
 		temp = 0.0;
 
-		
-		
+
+
 		//[y_est x_est] = C_est x_est + D_est [u_real y_real]
 		for(j = 0; j < N_output; j++){
 			buff = 0.0;
@@ -436,7 +437,7 @@ Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, flo
 			}
 			y_est[j] = buff;
 		}
-		
+
 
 
 			buff =  this->D_est_neg[24] * R_real + this->D_est_neg[36] * Z_real;
@@ -445,40 +446,40 @@ Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, flo
 			buff =  this->D_est_neg[25] * R_real + this->D_est_neg[37] * Z_real;
 			y_est[1] += buff;
 			buff = 0.0;
-		
 
 
-		
+
+
 			//x(k)=x(k+1) for the next step
 
-		
+
 		Outputs.Kalman_R= y_est[0];
 		Outputs.Kalman_Z= y_est[1];
 		Outputs.X_est=this->x_neg;
-		
+
 		buffer = 0.0;
 		for (i = 0; i < N_state; i++) {
 			buffer =this->x_dot_neg[i];
 			this->x_neg[i]=buffer;
 		}
-		
+
 				for(i=0; i< N_state; i++){
 				buff = this->x_neg[i];
 				this->X_LQR_neg[i] = buff;
 				}
-		
+
 		}else{
 			Outputs.Kalman_R= 0.085;
 			Outputs.Kalman_Z= 0.085;
 				for (i = 0; i < N_state; i++) {
 						X_est[i]=0.0;}
-										
+
 			Outputs.X_est=X_est;
 			}
-	
+
 
 	return Outputs;
-	
+
 }
 int LQR:: erase(float R_real, float Z_real) {
 	int i = 0;
@@ -486,6 +487,7 @@ int LQR:: erase(float R_real, float Z_real) {
 	float* state0_neg;
 	state0_pos = (float[N_state]){-0.005344092,	0.0520246,	-0.514431535,	1.150989527,	0.550062681,	-0.87777012,	0.308169602,	-0.356773408,	1.066604321,	-0.186231247};
 	state0_pos = (float[N_state]){0.0191923,	0.289779,	0.309377,	0.0539503,	-0.2685851,	0.6644621,	-1.0757866,	-0.0274285,	0.1494512,	-0.3546514};
+	state0_pos = (float[N_state]){	0.0075 ,   0.2071 ,  -0.0394  , -0.1344  , -0.0625   , 0.4041  , -0.5053 ,   0.0973  ,  0.2590,   -0.0032};
 
 	state0_neg=(float[N_state])  {-0.01322152646,	0.21257243483,	0.24681826366,	-0.33280829935,	-0.00461930354,	0.02045689304,	-0.05335478233,	0.02913866606,	-0.38100515631,	-0.01904457052};
 	state0_neg=(float[N_state])  {-0.1219579,	0.1357889,	0.8427376,	-0.3916806,	0.3457801,	0.0998817,	-0.0734193,	0.0101452,	-0.4403928,	-0.3972219};
@@ -511,8 +513,8 @@ int LQR:: erase(float R_real, float Z_real) {
 		//this->x_neg[i]=this->C_inv_neg[N_output*i]*R_real + this->C_inv_neg[1+N_output*i]*Z_real;
 		//this->X_LQR_neg[i]=this->C_inv_neg[N_output*i]*R_real + this->C_inv_neg[1+N_output*i]*Z_real;
 
-		//}		
-	
+		//}
+
 	return 1;
 	}
 
@@ -520,7 +522,7 @@ int LQR:: erase(float R_real, float Z_real) {
 	/* POSITIVE
 	/////normal
 	this-> N_BAR_pos = (float[N_input +  N_output]){-16738.8719868375, 3479.82442345434,
-							488.651395096507, -28.3958381254954};	
+							488.651395096507, -28.3958381254954};
 	this-> K_LQR_pos =(float[N_input * N_state]) {-39.8874724584811, -70.6769666120137, 354.869808121735, 370.159896447712, -106.569303855515, -10.6727031034049, -29.8250480200422, 75.3583282160950, -135.655340474040, -27.8586258177635,
 							4.85034537803885, 16.3699444462248, -103.189045436383, -88.9493312103841, 36.1506690550597, 19.0337453517795, 10.4943236824918, -28.3848265454111, 45.6326833691854, 8.77044127460252};
 	/////slow
@@ -528,14 +530,14 @@ int LQR:: erase(float R_real, float Z_real) {
 							-624.913612903589, 203.085650822326};
 	this-> K_LQR_pos =(float[N_input * N_state]) {-8.01681293888861, -26.8325522087463, 134.585605910785, 71.3907687002046, -31.1613639245902, 1.06653823136754, -8.67641023817368, 30.6278817417476, -52.6867168563030, -17.6236782619040,
 							-0.359505258997209, 5.27976739349132, -34.7284975804598, -24.9860321020505, 10.5336478520904, 3.20301260401835, 2.98116013872604, -9.62426558998255, 15.6891220336232, 4.25997674316981};
-	
-	
+
+
 	//more slow
 	this-> N_BAR_pos = (float[N_input +  N_output]){-10292.2693526553, 2133.74129809333,
 							-944.140351815484, 269.810568562941};
 	this-> K_LQR_pos =(float[N_input * N_state]) {-0.677239930551175, -5.56445051715661, 29.1530400398665, 10.5689835482429, -6.43042836144154, 0.784006911127944, -1.67848331436731, 6.89611601694075, -11.6198347798690, -4.41024916164279,
 							-0.253637909222695, 0.998896201615173, -6.91291373508615, -4.34730845911924, 2.02654430640833, 0.350198601401546, 0.540286005706202, -1.95918796444674, 3.18376611395890, 0.992300688479676};
-	
+
 	*/
 	/* NEGATIVE
 	//////normal
@@ -543,18 +545,18 @@ int LQR:: erase(float R_real, float Z_real) {
 							-0.233414809301534, -21.1374545809135, 237.120488501101, 3170.68925311282, -143.026532612836, 258.466914847382, -1451.21045848359, -298.057584698670, -925.765520002125, -4247.87411829111};
 	this-> N_BAR_neg=(float[N_input +  N_output]) {6692.27395164254, -960.635617013133,
 							-2256.41280370701, -489.068332481912};
-		
+
 	/////slow
 	this-> N_BAR_pos = (float[N_input +  N_output]){6589.72680834879, -954.006515986846,
 							-2507.09039980905, -438.508741661756};
 	this-> K_LQR_pos =(float[N_input * N_state]) {-0.140009763339089, -3.18557215603840, 30.5815322306256, 261.182404835037, 41.0701964065595, 15.1457297490992, -184.071391002032, -37.9502637307121, -150.255931786410, -524.709987410739,
 							-0.0430382829459303, -2.40364558484570, 28.2516724393487, 349.930303853398, -19.3580296640594, 27.8929619552656, -166.244389576828, -34.2340029306290, -102.365591295273, -474.430220412449};
-	
-	
+
+
 	//more slow
 	this-> N_BAR_pos = (float[N_input +  N_output]){6577.20274262693, -953.521247320254,
 							-2537.02933847542, -432.837113235285};
 	this-> K_LQR_pos =(float[N_input * N_state]) {-0.0143959540956107, -0.325150394017629, 3.13416013810849, 26.5396916000373, 4.19324806144036, 1.55806909562497, -18.7468162690424, -3.85545880019961, -15.3160343140834, -53.4859040919299,
 							-0.00458150757613837, -0.243881430718078, 2.88347865234915, 35.3882054725928, -2.01002787695297, 2.81135503841810, -16.8859632308927, -3.47894536276546, -10.3473795912101, -48.0323686610169};
-	
+
 	*/
