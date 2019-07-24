@@ -715,7 +715,7 @@ NOT USED FOR NOW      vertical field PS - radial position controller (auto)
 
 
 //////// Get initial conditions
-
+/*
 if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 750 ) {
 	if(this->firstcycle== 0){
 			int ivo;
@@ -728,7 +728,7 @@ else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < 
 			ivo = this->Kalman_LQR_var->erase(Radial_pos, Vertical_pos);
 	        this->firstcycle =1;}
 	}	else{this->firstcycle =0;}
-
+*/
 	//////////////////////////////////////
 
 
@@ -1126,7 +1126,7 @@ else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < 
 /////////////////////////// Kalman Filtering //////////////////////////
 
 
-if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 2050 ) {
+if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 2500 ) {
 	//
 
 	if(this->changeDetec == 0){
@@ -1143,7 +1143,7 @@ if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 2050 ) 
 
 
 
-} else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < -2050)  {
+} else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < -2500)  {
 	//
 
 	if(this->changeDetec == 0){
