@@ -938,7 +938,7 @@ else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < 
 
 				if (inputstruct[0].VerticalWaveformMode == 8 && inputstruct[0].HorizontalWaveformMode == 8){
                        /// Positive current
-					if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 750) {
+					if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 1000) {
 						this-> LQRcurrents= this->Kalman_LQR_var->MIMO_CONTROL_POSITIVE((inputstruct[0].VerticalOutputWaveform/1000),inputstruct[0].HorizontalOutputWaveform/1000, inputstruct[0].PositionR, inputstruct[0].PositionZ, inputstruct[0].VerticalCurrent, inputstruct[0].HorizontalCurrent);
 
 						//this-> LQRcurrents= this->Kalman_LQR_var->MIMO_CONTROL_POSITIVE((inputstruct[0].VerticalOutputWaveform/1000),inputstruct[0].HorizontalOutputWaveform/1000, inputstruct[0].PositionR, inputstruct[0].PositionZ, SendToVer_buff, SendToHor_buff);
@@ -949,7 +949,7 @@ else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < 
 
 											}
 					     /// Negative current
-					if (inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < -750) {
+					if (inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < -1000) {
 						this-> LQRcurrents= this->Kalman_LQR_var->MIMO_CONTROL_NEGATIVE((inputstruct[0].VerticalOutputWaveform/1000), inputstruct[0].HorizontalOutputWaveform/1000, inputstruct[0].PositionR, inputstruct[0].PositionZ, inputstruct[0].VerticalCurrent, inputstruct[0].HorizontalCurrent);
 
 						//this-> LQRcurrents= this->Kalman_LQR_var->MIMO_CONTROL_NEGATIVE((inputstruct[0].VerticalOutputWaveform/1000), inputstruct[0].HorizontalOutputWaveform/1000, inputstruct[0].PositionR, inputstruct[0].PositionZ, SendToVer_buff, SendToHor_buff);
@@ -979,7 +979,7 @@ else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < 
 
 						if(old_VerticalWaveformMode > 5 || old_VerticalWaveformMode < 2 ) this->horizontal_position_PID->LoadOldOutputWithinLimits((inputstruct[0].VerticalCurrent));
 
-						if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 850) {
+						if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 8500) {
 
 							//this->SendToVer_buff = this->horizontal_position_PID->CalculatePID((2 *(inputstruct[0].VerticalOutputWaveform/1000) - inputstruct[0].PositionR),(inputstruct[0].VerticalOutputWaveform/1000));
 							this->SendToVer_buff = this->horizontal_position_PID->CalculatePID_vert(inputstruct[0].PositionR,(inputstruct[0].VerticalOutputWaveform/1000),2,0);
@@ -1126,7 +1126,7 @@ else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < 
 /////////////////////////// Kalman Filtering //////////////////////////
 
 
-if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 2000 ) {
+if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 1000 ) {
 	//
 
 	if(this->changeDetec == 0){
@@ -1143,7 +1143,7 @@ if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 2000 ) 
 
 
 
-} else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < -2000)  {
+} else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < -1000)  {
 	//
 
 	if(this->changeDetec == 0){
