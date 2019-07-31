@@ -1135,8 +1135,8 @@ if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 1000 &&
 		this->changeDetec =1;
 		}
 
-	//this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_POS(Radial_pos, Vertical_pos,SendToVer_buff, SendToHor_buff, 1);
-	this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_POS(Radial_pos, Vertical_pos,inputstruct[0].VerticalCurrent, inputstruct[0].HorizontalCurrent, 1);
+	this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_POS(Radial_pos, Vertical_pos,SendToVer_buff, SendToHor_buff, 1);
+	//this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_POS(Radial_pos, Vertical_pos,inputstruct[0].VerticalCurrent, inputstruct[0].HorizontalCurrent, 1);
 
 	//this->CentroidPos.Kalman_R=0.05;
 	//this->CentroidPos.Kalman_Z=0.05;
@@ -1152,8 +1152,8 @@ if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 1000 &&
 		this->changeDetec =1;
 		}
 
-	this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_NEG(Radial_pos, Vertical_pos, inputstruct[0].VerticalCurrent, inputstruct[0].HorizontalCurrent, 1);
-	//this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_NEG(Radial_pos, Vertical_pos, SendToVer_buff, SendToHor_buff, 1);
+	//this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_NEG(Radial_pos, Vertical_pos, inputstruct[0].VerticalCurrent, inputstruct[0].HorizontalCurrent, 1);
+	this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_NEG(Radial_pos, Vertical_pos, SendToVer_buff, SendToHor_buff, 1);
 
 	//this->CentroidPos.Kalman_R=0.05;
 	//this->CentroidPos.Kalman_Z=0.05;
