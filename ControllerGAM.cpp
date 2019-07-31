@@ -1126,7 +1126,7 @@ else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < 
 /////////////////////////// Kalman Filtering //////////////////////////
 
 
-if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 1000 && inputstruct[0].DischargeStatus==1 ) {
+if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 900 ) {
 	//
 
 	if(this->changeDetec == 0){
@@ -1143,7 +1143,7 @@ if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 1000 &&
 
 
 
-} else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < -1000 && inputstruct[0].DischargeStatus==1)  {
+} else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < -900 )  {
 	//
 
 	if(this->changeDetec == 0){
