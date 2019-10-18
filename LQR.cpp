@@ -511,7 +511,7 @@ Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, flo
 		x_neg[7]  += buff;
 		buff = 0.0;
 		buff =  this->D_est_neg[34] * R_real + this->D_est_neg[46] * Z_real;
-		x_neg[9] += buff;
+		x_neg[8] += buff;
 		buff = 0.0;
 		buff =  this->D_est_neg[35] * R_real + this->D_est_neg[47] * Z_real;
 		x_neg[9]  += buff;
