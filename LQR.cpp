@@ -457,6 +457,69 @@ Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, flo
 	buff=0.0;
 	if(sign == 1){
 
+		//[y_est x_est] = C_est x_est + D_est [u_real y_real]
+		for(j = 0; j < N_output; j++){
+			buff = 0.0;
+			for (i = 0; i < N_state; i++) {
+				m=i + j*(N_state);
+				 buff += this->C_est_neg[m] * this->x_neg[i];
+			}
+			y_est[j] = buff;
+		}
+
+
+
+			buff =  this->D_est_neg[24] * R_real + this->D_est_neg[36] * Z_real;
+			y_est[0] += buff;
+			buff = 0.0;
+			buff =  this->D_est_neg[25] * R_real + this->D_est_neg[37] * Z_real;
+			y_est[1] += buff;
+			buff = 0.0;
+
+// Lets take the states from y_est
+		for(j = N_output; j < N_state+N_output; j++){
+			buff = 0.0;
+			for (i = 0; i < N_state; i++) {
+				m=i + j*(N_state);
+				 buff += this->C_est_neg[m] * this->x_neg[i];
+			}
+			 this->x_neg[j-N_output] = buff;
+		}
+
+		buff =  this->D_est_neg[26] * R_real + this->D_est_neg[38] * Z_real;
+		x_neg[0] += buff;
+		buff = 0.0;
+		buff =  this->D_est_neg[27] * R_real + this->D_est_neg[39] * Z_real;
+		x_neg[1]  += buff;
+		buff = 0.0;
+		buff =  this->D_est_neg[28] * R_real + this->D_est_neg[40] * Z_real;
+		x_neg[2] += buff;
+		buff = 0.0;
+		buff =  this->D_est_neg[29] * R_real + this->D_est_neg[41] * Z_real;
+		x_neg[3]  += buff;
+		buff = 0.0;
+		buff =  this->D_est_neg[30] * R_real + this->D_est_neg[42] * Z_real;
+		x_neg[4]  += buff;
+		buff = 0.0;
+		buff =  this->D_est_neg[31] * R_real + this->D_est_neg[43] * Z_real;
+		x_neg[5] += buff;
+		buff = 0.0;
+		buff =  this->D_est_neg[32] * R_real + this->D_est_neg[44] * Z_real;
+		x_neg[6]  += buff;
+		buff = 0.0;
+		buff =  this->D_est_neg[33] * R_real + this->D_est_neg[45] * Z_real;
+		x_neg[7]  += buff;
+		buff = 0.0;
+		buff =  this->D_est_neg[34] * R_real + this->D_est_neg[46] * Z_real;
+		x_neg[9] += buff;
+		buff = 0.0;
+		buff =  this->D_est_neg[35] * R_real + this->D_est_neg[47] * Z_real;
+		x_neg[9]  += buff;
+		buff = 0.0;
+
+
+
+// Lets do Ax + Bu
 		for(j = 0; j < N_state; j++){
 			buff = 0.0;
 			for (i = 0; i < N_state; i++) {
@@ -478,24 +541,6 @@ Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, flo
 
 
 
-		//[y_est x_est] = C_est x_est + D_est [u_real y_real]
-		for(j = 0; j < N_output; j++){
-			buff = 0.0;
-			for (i = 0; i < N_state; i++) {
-				m=i + j*(N_state);
-				 buff += this->C_est_neg[m] * this->x_neg[i];
-			}
-			y_est[j] = buff;
-		}
-
-
-
-			buff =  this->D_est_neg[24] * R_real + this->D_est_neg[36] * Z_real;
-			y_est[0] += buff;
-			buff = 0.0;
-			buff =  this->D_est_neg[25] * R_real + this->D_est_neg[37] * Z_real;
-			y_est[1] += buff;
-			buff = 0.0;
 
 
 
