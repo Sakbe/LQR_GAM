@@ -949,7 +949,7 @@ else if ( inputstruct[0].PrimaryCurrent < -25 && inputstruct[0].PlasmaCurrent < 
 
 											}
 					     /// Negative current
-					if (inputstruct[0].PrimaryCurrent < 50 && inputstruct[0].PlasmaCurrent < -1000 && inputstruct[0].DischargeStatus==1) {
+					if (inputstruct[0].PrimaryCurrent < 50 && inputstruct[0].PlasmaCurrent < -750 && inputstruct[0].DischargeStatus==1) {
 						this-> LQRcurrents= this->Kalman_LQR_var->MIMO_CONTROL_NEGATIVE((inputstruct[0].VerticalOutputWaveform/1000), inputstruct[0].HorizontalOutputWaveform/1000, inputstruct[0].PositionR, inputstruct[0].PositionZ, inputstruct[0].VerticalCurrent, inputstruct[0].HorizontalCurrent);
 
 						//this-> LQRcurrents= this->Kalman_LQR_var->MIMO_CONTROL_NEGATIVE((inputstruct[0].VerticalOutputWaveform/1000), inputstruct[0].HorizontalOutputWaveform/1000, inputstruct[0].PositionR, inputstruct[0].PositionZ, SendToVer_buff, SendToHor_buff);
@@ -1143,7 +1143,7 @@ if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 1000 &&
 
 
 
-} else if ( inputstruct[0].PrimaryCurrent < 50 &&  inputstruct[0].PlasmaCurrent < -1000  && inputstruct[0].DischargeStatus==1 )  {
+} else if ( inputstruct[0].PrimaryCurrent < 50 &&  inputstruct[0].PlasmaCurrent < -750  && inputstruct[0].DischargeStatus==1 )  {
 	//
 
 	if(this->changeDetec == 0){
@@ -1152,8 +1152,8 @@ if (inputstruct[0].PrimaryCurrent > 25 && inputstruct[0].PlasmaCurrent > 1000 &&
 		this->changeDetec =1;
 		}
 
-	//this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_NEG(Radial_pos, Vertical_pos, inputstruct[0].VerticalCurrent, inputstruct[0].HorizontalCurrent, 1);
-	this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_NEG(Radial_pos, Vertical_pos, SendToVer_buff, SendToHor_buff, 1);
+	this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_NEG(Radial_pos, Vertical_pos, inputstruct[0].VerticalCurrent, inputstruct[0].HorizontalCurrent, 1);
+//	this-> CentroidPos= this->Kalman_LQR_var->KALMAN_FILTER_NEG(Radial_pos, Vertical_pos, SendToVer_buff, SendToHor_buff, 1);
 
 	//this->CentroidPos.Kalman_R=0.05;
 	//this->CentroidPos.Kalman_Z=0.05;
