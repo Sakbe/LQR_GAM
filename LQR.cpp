@@ -223,7 +223,7 @@ this-> D_est_neg=(float[(N_state + N_output) * (N_input + N_output)]){0,	0,	0,	0
 							-2977.2307276,	-378.189811};
 
 		this-> N_BAR_neg = (float[N_input +  N_output]){17390.9616477105,	-204318.054716473,
-979.24252675757,	-135404.494111229};						
+979.24252675757,	-135404.494111229};
 
 
 
@@ -545,106 +545,6 @@ Kalman LQR:: KALMAN_FILTER_POS(float R_real, float Z_real, float I_vertical, flo
 
 }
 
-// Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, float I_horizontal, int sign){
-// 	//the same as before
-// 	//if we use this in mimo class we can comment from 102 to 115
-// 	//i putted because we can copy this in IPID class
-// 	float temp=0.0;
-// 	int j=0;
-// 	int i=0;
-// 	int m=0;
-// 	int n=0;
-// 	// buffers time
-//
-// 	float buff=0.0;
-// 	float buffer=0.0;
-//
-//
-// 	float* y_est;
-// 	y_est =(float[2]){0, 0};
-// 	float* X_est;
-// 	X_est =(float[10]){0, 0,0,0,0,0,0,0,0,0};
-// 	Kalman Outputs={0.085,0.085,X_est};
-//
-//
-// 	buff=0.0;
-// 	if(sign == 1){
-//
-// 		for(j = 0; j < N_state; j++){
-// 			buff = 0.0;
-// 			for (i = 0; i < N_state; i++) {
-// 				m=i + j*(N_state);
-// 				buff = buff + this->A_est_neg[m] * this->x_neg[i];
-// 			}
-// 			this->x_dot_neg[j] = buff;
-// 		}
-//
-// 		for(i = 0; i < N_state; i++){
-// 			j= i + (N_state);
-// 			m=i + 2*(N_state);
-// 			n=i + 3*(N_state);
-// 			temp =  this->B_est_neg[i] * I_vertical + this->B_est_neg[j] * I_horizontal + this->B_est_neg[m] * R_real + this->B_est_neg[n] * Z_real;
-// 			this->x_dot_neg[i] += temp;
-//
-// 		}
-// 		temp = 0.0;
-//
-//
-//
-// 		//[y_est x_est] = C_est x_est + D_est [u_real y_real]
-// 		for(j = 0; j < N_output; j++){
-// 			buff = 0.0;
-// 			for (i = 0; i < N_state; i++) {
-// 				m=i + j*(N_state);
-// 				 buff += this->C_est_neg[m] * this->x_neg[i];
-// 			}
-// 			y_est[j] = buff;
-// 		}
-//
-//
-//
-// 			buff =  this->D_est_neg[24] * R_real + this->D_est_neg[36] * Z_real;
-// 			y_est[0] += buff;
-// 			buff = 0.0;
-// 			buff =  this->D_est_neg[25] * R_real + this->D_est_neg[37] * Z_real;
-// 			y_est[1] += buff;
-// 			buff = 0.0;
-//
-//
-//
-//
-// 			//x(k)=x(k+1) for the next step
-//
-//
-// 		Outputs.Kalman_R= y_est[0];
-// 		Outputs.Kalman_Z= y_est[1];
-// 		Outputs.X_est=this->x_neg;
-//
-// 		buffer = 0.0;
-// 		for (i = 0; i < N_state; i++) {
-// 			buffer =this->x_dot_neg[i];
-// 			this->x_neg[i]=buffer;
-// 		}
-//
-// 				for(i=0; i< N_state; i++){
-// 				buff = this->x_neg[i];
-// 				this->X_LQR_neg[i] = buff;
-// 				}
-//
-// 		}else{
-// 			Outputs.Kalman_R= 0.085;
-// 			Outputs.Kalman_Z= 0.085;
-// 				for (i = 0; i < N_state; i++) {
-// 						X_est[i]=0.0;}
-//
-// 			Outputs.X_est=X_est;
-// 			}
-//
-//
-// 	return Outputs;
-//
-// }
-
 Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, float I_horizontal, int sign){
 	//the same as before
 	//if we use this in mimo class we can comment from 102 to 115
@@ -670,26 +570,24 @@ Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, flo
 	buff=0.0;
 	if(sign == 1){
 
+		for(j = 0; j < N_state; j++){
+			buff = 0.0;
+			for (i = 0; i < N_state; i++) {
+				m=i + j*(N_state);
+				buff = buff + this->A_est_neg[m] * this->x_neg[i];
+			}
+			this->x_dot_neg[j] = buff;
+		}
 
-		// Lets do Ax + Bu
-				for(j = 0; j < N_state; j++){
-					buff = 0.0;
-					for (i = 0; i < N_state; i++) {
-						m=i + j*(N_state);
-						buff = buff + this->A_est_neg[m] * this->x_neg[i];
-					}
-					this->x_dot_neg[j] = buff;
-				}
+		for(i = 0; i < N_state; i++){
+			j= i + (N_state);
+			m=i + 2*(N_state);
+			n=i + 3*(N_state);
+			temp =  this->B_est_neg[i] * I_vertical + this->B_est_neg[j] * I_horizontal + this->B_est_neg[m] * R_real + this->B_est_neg[n] * Z_real;
+			this->x_dot_neg[i] += temp;
 
-				for(i = 0; i < N_state; i++){
-					j= i + (N_state);
-					m=i + 2*(N_state);
-					n=i + 3*(N_state);
-					temp =  this->B_est_neg[i] * I_vertical + this->B_est_neg[j] * I_horizontal + this->B_est_neg[m] * R_real + this->B_est_neg[n] * Z_real;
-					this->x_dot_neg[i] += temp;
-
-				}
-				temp = 0.0;
+		}
+		temp = 0.0;
 
 
 
@@ -711,54 +609,6 @@ Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, flo
 			buff =  this->D_est_neg[25] * R_real + this->D_est_neg[37] * Z_real;
 			y_est[1] += buff;
 			buff = 0.0;
-
-// Lets take the states from y_est
-		for(j = N_output; j < N_state+N_output; j++){
-			buff = 0.0;
-			for (i = 0; i < N_state; i++) {
-				m=i + j*(N_state);
-				 buff += this->C_est_neg[m] * this->x_neg[i];
-			}
-			 this->x_neg[j-N_output] = buff;
-		}
-
-		buff =  this->D_est_neg[26] * R_real + this->D_est_neg[38] * Z_real;
-		x_neg[0] += buff;
-		buff = 0.0;
-		buff =  this->D_est_neg[27] * R_real + this->D_est_neg[39] * Z_real;
-		x_neg[1]  += buff;
-		buff = 0.0;
-		buff =  this->D_est_neg[28] * R_real + this->D_est_neg[40] * Z_real;
-		x_neg[2] += buff;
-		buff = 0.0;
-		buff =  this->D_est_neg[29] * R_real + this->D_est_neg[41] * Z_real;
-		x_neg[3]  += buff;
-		buff = 0.0;
-		buff =  this->D_est_neg[30] * R_real + this->D_est_neg[42] * Z_real;
-		x_neg[4]  += buff;
-		buff = 0.0;
-		buff =  this->D_est_neg[31] * R_real + this->D_est_neg[43] * Z_real;
-		x_neg[5] += buff;
-		buff = 0.0;
-		buff =  this->D_est_neg[32] * R_real + this->D_est_neg[44] * Z_real;
-		x_neg[6]  += buff;
-		buff = 0.0;
-		buff =  this->D_est_neg[33] * R_real + this->D_est_neg[45] * Z_real;
-		x_neg[7]  += buff;
-		buff = 0.0;
-		buff =  this->D_est_neg[34] * R_real + this->D_est_neg[46] * Z_real;
-		x_neg[8] += buff;
-		buff = 0.0;
-		buff =  this->D_est_neg[35] * R_real + this->D_est_neg[47] * Z_real;
-		x_neg[9]  += buff;
-		buff = 0.0;
-
-
-
-
-
-
-
 
 
 
@@ -794,6 +644,156 @@ Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, flo
 	return Outputs;
 
 }
+//
+// Kalman LQR:: KALMAN_FILTER_NEG(float R_real, float Z_real, float I_vertical, float I_horizontal, int sign){
+// 	//the same as before
+// 	//if we use this in mimo class we can comment from 102 to 115
+// 	//i putted because we can copy this in IPID class
+// 	float temp=0.0;
+// 	int j=0;
+// 	int i=0;
+// 	int m=0;
+// 	int n=0;
+// 	// buffers time
+//
+// 	float buff=0.0;
+// 	float buffer=0.0;
+//
+//
+// 	float* y_est;
+// 	y_est =(float[2]){0, 0};
+// 	float* X_est;
+// 	X_est =(float[10]){0, 0,0,0,0,0,0,0,0,0};
+// 	Kalman Outputs={0.085,0.085,X_est};
+//
+//
+// 	buff=0.0;
+// 	if(sign == 1){
+//
+//
+// 		// Lets do Ax + Bu
+// 				for(j = 0; j < N_state; j++){
+// 					buff = 0.0;
+// 					for (i = 0; i < N_state; i++) {
+// 						m=i + j*(N_state);
+// 						buff = buff + this->A_est_neg[m] * this->x_neg[i];
+// 					}
+// 					this->x_dot_neg[j] = buff;
+// 				}
+//
+// 				for(i = 0; i < N_state; i++){
+// 					j= i + (N_state);
+// 					m=i + 2*(N_state);
+// 					n=i + 3*(N_state);
+// 					temp =  this->B_est_neg[i] * I_vertical + this->B_est_neg[j] * I_horizontal + this->B_est_neg[m] * R_real + this->B_est_neg[n] * Z_real;
+// 					this->x_dot_neg[i] += temp;
+//
+// 				}
+// 				temp = 0.0;
+//
+//
+//
+// 		//[y_est x_est] = C_est x_est + D_est [u_real y_real]
+// 		for(j = 0; j < N_output; j++){
+// 			buff = 0.0;
+// 			for (i = 0; i < N_state; i++) {
+// 				m=i + j*(N_state);
+// 				 buff += this->C_est_neg[m] * this->x_neg[i];
+// 			}
+// 			y_est[j] = buff;
+// 		}
+//
+//
+//
+// 			buff =  this->D_est_neg[24] * R_real + this->D_est_neg[36] * Z_real;
+// 			y_est[0] += buff;
+// 			buff = 0.0;
+// 			buff =  this->D_est_neg[25] * R_real + this->D_est_neg[37] * Z_real;
+// 			y_est[1] += buff;
+// 			buff = 0.0;
+//
+// // Lets take the states from y_est
+// 		for(j = N_output; j < N_state+N_output; j++){
+// 			buff = 0.0;
+// 			for (i = 0; i < N_state; i++) {
+// 				m=i + j*(N_state);
+// 				 buff += this->C_est_neg[m] * this->x_neg[i];
+// 			}
+// 			 this->x_neg[j-N_output] = buff;
+// 		}
+//
+// 		buff =  this->D_est_neg[26] * R_real + this->D_est_neg[38] * Z_real;
+// 		x_neg[0] += buff;
+// 		buff = 0.0;
+// 		buff =  this->D_est_neg[27] * R_real + this->D_est_neg[39] * Z_real;
+// 		x_neg[1]  += buff;
+// 		buff = 0.0;
+// 		buff =  this->D_est_neg[28] * R_real + this->D_est_neg[40] * Z_real;
+// 		x_neg[2] += buff;
+// 		buff = 0.0;
+// 		buff =  this->D_est_neg[29] * R_real + this->D_est_neg[41] * Z_real;
+// 		x_neg[3]  += buff;
+// 		buff = 0.0;
+// 		buff =  this->D_est_neg[30] * R_real + this->D_est_neg[42] * Z_real;
+// 		x_neg[4]  += buff;
+// 		buff = 0.0;
+// 		buff =  this->D_est_neg[31] * R_real + this->D_est_neg[43] * Z_real;
+// 		x_neg[5] += buff;
+// 		buff = 0.0;
+// 		buff =  this->D_est_neg[32] * R_real + this->D_est_neg[44] * Z_real;
+// 		x_neg[6]  += buff;
+// 		buff = 0.0;
+// 		buff =  this->D_est_neg[33] * R_real + this->D_est_neg[45] * Z_real;
+// 		x_neg[7]  += buff;
+// 		buff = 0.0;
+// 		buff =  this->D_est_neg[34] * R_real + this->D_est_neg[46] * Z_real;
+// 		x_neg[8] += buff;
+// 		buff = 0.0;
+// 		buff =  this->D_est_neg[35] * R_real + this->D_est_neg[47] * Z_real;
+// 		x_neg[9]  += buff;
+// 		buff = 0.0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// 			//x(k)=x(k+1) for the next step
+//
+//
+// 		Outputs.Kalman_R= y_est[0];
+// 		Outputs.Kalman_Z= y_est[1];
+// 		Outputs.X_est=this->x_neg;
+//
+// 		buffer = 0.0;
+// 		for (i = 0; i < N_state; i++) {
+// 			buffer =this->x_dot_neg[i];
+// 			this->x_neg[i]=buffer;
+// 		}
+//
+// 				for(i=0; i< N_state; i++){
+// 				buff = this->x_neg[i];
+// 				this->X_LQR_neg[i] = buff;
+// 				}
+//
+// 		}else{
+// 			Outputs.Kalman_R= 0.085;
+// 			Outputs.Kalman_Z= 0.085;
+// 				for (i = 0; i < N_state; i++) {
+// 						X_est[i]=0.0;}
+//
+// 			Outputs.X_est=X_est;
+// 			}
+//
+//
+// 	return Outputs;
+//
+// }
 
 int LQR:: erase(float R_real, float Z_real) {
 	int i = 0;
